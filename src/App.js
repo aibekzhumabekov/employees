@@ -10,6 +10,7 @@ class App extends Component {
         this.state = {
             employees : [],
             isLoading: false,
+            searchBy: '',
             search:''
         }
     }
@@ -29,14 +30,23 @@ class App extends Component {
         this.setState({search:e.target.value});
     }
 
-    render(){
-        const { employees, isLoading, search } = this.state;
-        
+    selectOnChange = (e) => {
+        this.setState({searchBy:e.target.value});
+    }
+
+    filter = () => {
+        const {employees, search, searchBy} = this.state;
         const filteredEmployees = employees.filter(employee => {
-            const fFirst = employee.first_name.toLowerCase().includes(search.toLowerCase());
-            const fLast = employee.last_name.toLowerCase().includes(search.toLowerCase());
-            return fFirst || fLast
+            return searchBy.length ? employee[searchBy].toLowerCase().includes(search.toLowerCase()) : true;
         })
+        return filteredEmployees
+    }
+
+    render(){
+        const { isLoading, search, searchBy } = this.state;
+        
+        // Filtering / Searching by  
+        const filteredEmployees = this.filter();
 
         const loader = <div className="lds-dual-ring"></div>;
         let content = isLoading ? loader : <List employees={filteredEmployees} />
@@ -45,7 +55,7 @@ class App extends Component {
         }
         return (
             <div className="container">
-                <Search value={search} getSearch={this.getSearch} />
+                <Search searchBy={searchBy} selectOnChange={this.selectOnChange} value={search} getSearch={this.getSearch} />
                 {content}
             </div>
             

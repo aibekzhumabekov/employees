@@ -3,9 +3,19 @@
 }
 .cell {
     display: inline-block;
-    width: 200px;
+    width: 185px;
     padding: 10px;
     box-sizing: border-box;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+.cell.sm {
+    width: 60px;
+    padding: 10px;
+}
+.row:hover {
+    background-color: #cecece;
+    cursor: pointer;
 }
 .row.header {
     font-weight: bold;
