@@ -48,6 +48,7 @@ class App extends Component {
                 <Search value={search} getSearch={this.getSearch} />
                 {content}
             </div>
+            
         )
 
     }
