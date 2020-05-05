@@ -5,11 +5,12 @@ import './single.css'
 class Single extends Component {
     render(){
         const {id} = this.props.match.params;
+        console.log(this.props)
         const { employees } = this.props;
 
         let employee = {};
         for(let i=0;i<employees.length; i++){
-            if(id === employees[i].id){
+            if(Number(id) === employees[i].id){
                 employee = employees[i];
                 break;
             }

@@ -43,7 +43,7 @@ class App extends Component {
     filter = () => {
         const {employees, search, searchBy} = this.state;
         const filteredEmployees = employees.filter(employee => {
-            return searchBy.length ? employee[searchBy].toLowerCase().includes(search.toLowerCase()) : true;
+            return employee[searchBy] && searchBy.length ? employee[searchBy].toLowerCase().includes(search.toLowerCase()) : true;
         })
         return filteredEmployees
     }
@@ -70,6 +70,7 @@ class App extends Component {
                     <Route path="/employee/:id">
                         <Single employees={employees} data={selected} />
                     </Route>
+                    
                 </div>
             </Switch>
             </Router>
