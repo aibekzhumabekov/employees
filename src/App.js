@@ -47,18 +47,18 @@ class App extends Component {
         
         // Filtering / Searching by  
         const filteredEmployees = this.filter();
-
         const loader = <div className="lds-dual-ring"></div>;
         let content = isLoading ? loader : <List employees={filteredEmployees} />
         if(!isLoading && !filteredEmployees.length){
             content = <div className="not-found">Data Not Found</div>
         }
+
         return (
             <div className="container">
                 <Search searchBy={searchBy} selectOnChange={this.selectOnChange} value={search} getSearch={this.getSearch} />
                 {content}
             </div>
-            
+
         )
 
     }
