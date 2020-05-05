@@ -4,3 +4,7 @@
 .single .property {
     width: 100px;
 }
+.chart {
+    display: inline-block;
+    width: 350px;
+}

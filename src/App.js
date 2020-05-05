@@ -68,7 +68,7 @@ class App extends Component {
                         {content}
                     </Route>
                     <Route path="/employee/:id">
-                        <Single employees={employees} data={selected} />
+                        {!isLoading && employees.length > 0 && <Single employees={employees} data={selected} />}
                     </Route>
                     
                 </div>
