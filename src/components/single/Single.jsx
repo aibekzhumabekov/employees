@@ -82,13 +82,13 @@ class Single extends Component {
                             <div className="value">{employee.email}</div>
                         </li>
                     </ul>
-                    <div className="chart">
-                    <PieChart width={300} height={300}>
-                        <Pie isAnimationActive={true} data={pieData} cx={200} cy={200} outerRadius={80} fill="#82ca9d" label/>
+                    
+                    <PieChart width={400} height={400} >
+                        <Pie isAnimationActive={true} data={pieData} cx={200} cy={200} outerRadius={130} fill="#82ca9d" label/>
                         <Tooltip/>
                     </PieChart>
-                    </div>
-                    <div className="chart">
+              
+                
                     <BarChart width={400} height={200} data={arr}
                                 margin={{top: 5, right: 30, left: 20, bottom: 5}}>
                         <CartesianGrid strokeDasharray="3 3"/>
@@ -98,15 +98,9 @@ class Single extends Component {
                         <Legend />
                         <Bar dataKey="count" fill="#8884d8" />
                     </BarChart>
-                    </div>
+                
                     
-                    <div>
-                        {
-                            employee.logins.map(login=>{
-                                return <div>{moment(login.date).format('MMM Do YY')}</div>
-                            })
-                        }
-                    </div>
+                  
                     
                 </div>
         )
