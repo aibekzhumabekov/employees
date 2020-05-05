@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { withRouter } from "react-router";
 import moment from "moment";
 import {
-    BarChart, Bar, Cell, XAxis, YAxis, CartesianGrid, Tooltip, Legend, PieChart, Pie,
+    BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, PieChart, Pie,
   } from 'recharts';
 import './single.css'
 
@@ -16,9 +16,9 @@ class Single extends Component {
         const {id} = this.props.match.params;
         const { employees } = this.props;
 
-        let employee = { };
+        let employee = {};
         for(let i=0;i<employees.length; i++){
-            if(id == employees[i].id){
+            if(Number(id) === employees[i].id){
                 employee = employees[i];
                 break;
             }
