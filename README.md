@@ -67,7 +67,18 @@
     * Learn how Js sort method works
 
 
-# Day 3 - 4/29/2020
+# Day 5 - 5/4/2020
+
+* What we do
+    * Single User Component
+
+* What we practiced?
+    * Overflow content
+    * Passing Data
+
+* What we learned?
+    * React Router
+    * Passing data with react-router
 
 
 

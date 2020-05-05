@@ -2,6 +2,8 @@ import React, {Component} from 'react';
 import List from './components/list/List';
 import Search from './components/search/Search';
 import './app.css'
+import { Switch, Route, BrowserRouter as Router } from 'react-router-dom';
+import Single from './components/single/Single';
 
 class App extends Component {
     constructor(){
@@ -11,7 +13,8 @@ class App extends Component {
             employees : [],
             isLoading: false,
             searchBy: '',
-            search:''
+            search:'',
+            selected: {}
         }
     }
 
@@ -33,6 +36,9 @@ class App extends Component {
     selectOnChange = (e) => {
         this.setState({searchBy:e.target.value});
     }
+    setEmployee = (selected) => {
+        this.setState({selected});
+    }
 
     filter = () => {
         const {employees, search, searchBy} = this.state;
@@ -43,22 +49,30 @@ class App extends Component {
     }
 
     render(){
-        const { isLoading, search, searchBy } = this.state;
+        const { isLoading, search, searchBy, selected, employees } = this.state;
         
         // Filtering / Searching by  
         const filteredEmployees = this.filter();
         const loader = <div className="lds-dual-ring"></div>;
-        let content = isLoading ? loader : <List employees={filteredEmployees} />
+        let content = isLoading ? loader : <List setEmployee={this.setEmployee} employees={filteredEmployees} />
         if(!isLoading && !filteredEmployees.length){
             content = <div className="not-found">Data Not Found</div>
         }
 
         return (
-            <div className="container">
-                <Search searchBy={searchBy} selectOnChange={this.selectOnChange} value={search} getSearch={this.getSearch} />
-                {content}
-            </div>
-
+            <Router>
+            <Switch>
+                <div className="container">
+                    <Route path="/" exact>
+                        <Search searchBy={searchBy} selectOnChange={this.selectOnChange} value={search} getSearch={this.getSearch} />
+                        {content}
+                    </Route>
+                    <Route path="/employee/:id">
+                        <Single employees={employees} data={selected} />
+                    </Route>
+                </div>
+            </Switch>
+            </Router>
         )
 
     }

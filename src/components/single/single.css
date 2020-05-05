@@ -1,0 +1,6 @@
+.single .property, .single .value {
+    display: inline-block
+}
+.single .property {
+    width: 100px;
+}

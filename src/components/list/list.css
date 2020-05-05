@@ -1,5 +1,8 @@
 .list {
     box-shadow: 2px 2px 2px 2px #333;
+    height: 400px;
+    overflow: scroll;
+    margin-bottom: 20px;
 }
 .cell {
     display: inline-block;
@@ -23,4 +26,5 @@
 }
 .row {
     border-bottom: solid 1px #cecece;
+    display: inline-block;
 }
