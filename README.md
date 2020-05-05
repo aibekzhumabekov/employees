@@ -79,14 +79,19 @@
 * What we learned?
     * React Router
     * Passing data with react-router
+    * Installing/Using third party libraries
+
+## Homework
+    * Build React-Router part again
+    * Research what kind graph libraries for React?
 
 
 
 ## Desired Features
-    * Sort
-    * Pagination
+    * Sort - Done
+    * Pagination - Done
     * CRUD app
-    * Single User Component
+    * Single User Component - Done
     * Add Graph - Login History
     * Add new libraries (sass, bootstrap, react-router)
     * Redux

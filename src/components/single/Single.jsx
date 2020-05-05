@@ -9,7 +9,7 @@ class Single extends Component {
 
         let employee = {};
         for(let i=0;i<employees.length; i++){
-            if(id == employees[i].id){
+            if(id === employees[i].id){
                 employee = employees[i];
                 break;
             }
