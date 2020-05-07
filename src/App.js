@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import List from './components/list/List';
 import Search from './components/search/Search';
-import './app.css'
+import './app.scss';
 import { Switch, Route, BrowserRouter as Router } from 'react-router-dom';
 import Single from './components/single/Single';
 
