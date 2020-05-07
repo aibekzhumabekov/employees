@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
 import { withRouter } from "react-router";
-import moment from "moment";
-import {
-    BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, PieChart, Pie,
-  } from 'recharts';
+import moment from 'moment'
+import {BarChart, Bar, XAxis, CartesianGrid, Tooltip} from 'recharts';
+
 import './single.css'
 
 class Single extends Component {
@@ -14,7 +13,6 @@ class Single extends Component {
 
     render(){
         const {id} = this.props.match.params;
-        console.log(this.props)
         const { employees } = this.props;
 
         let employee = {};
@@ -25,33 +23,28 @@ class Single extends Component {
             }
         }
 
-        let months = {};
-        let days = {};
-        employee.logins.forEach(login=>{
-            const {date} = login;
-            const month = moment(date).format('MMM');
-            const day = moment(date).format('dddd');
-            if(!months[month]){
-                months[month] = 1
-            } else {
-                months[month]++
-            }
-            if(!days[day]){
-                days[day] = 1
-            } else {
-                days[day]++
-            }
-        })
-        const arr = Object.keys(months).map(month=>{
-            const count = months[month];
-            return {month,count}
-        })
 
-        const pieData = Object.keys(days).map(day=>{
-            const count = days[day];
-            return {name:day,value:count}
-        })
 
+       const months = {}
+       
+       employee.logins.map(login=>{
+           const month = moment(login.date).format("MMMM")
+
+           if(months[month]){
+               months[month]++
+           }else{
+               months[month]=1
+           }
+           return months
+
+       })
+        const monthsChart = Object.keys(months).map(month=>{
+        const count = months[month]
+         return {month, count}
+        })
+        
+
+        
 
         return (
              <div className="single">
@@ -81,27 +74,19 @@ class Single extends Component {
                             <div className="property">Email</div>
                             <div className="value">{employee.email}</div>
                         </li>
-                    </ul>
-                    
-                    <PieChart width={400} height={400} >
-                        <Pie isAnimationActive={true} data={pieData} cx={200} cy={200} outerRadius={130} fill="#82ca9d" label/>
-                        <Tooltip/>
-                    </PieChart>
-              
-                
-                    <BarChart width={400} height={200} data={arr}
-                                margin={{top: 5, right: 30, left: 20, bottom: 5}}>
-                        <CartesianGrid strokeDasharray="3 3"/>
-                        <XAxis dataKey="month"/>
-                        <YAxis/>
-                        <Tooltip/>
-                        <Legend />
-                        <Bar dataKey="count" fill="#8884d8" />
+                        <li>Logins:</li>  <BarChart width={600} height={300} data={monthsChart}
+                            margin={{top: 5, right: 30, left: 20, bottom: 5}}>
+                    <CartesianGrid strokeDasharray="3 3"/>
+                    <XAxis dataKey="month"/>
+                    <Tooltip/>
+                    <Bar dataKey="count" fill="#8884d8" />
                     </BarChart>
-                
+                      
+                       
+                    </ul>
+
                     
-                  
-                    
+
                 </div>
         )
     }

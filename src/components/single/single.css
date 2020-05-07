@@ -8,3 +8,6 @@
     display: inline-block;
     width: 350px;
 }
+.flex{
+    display: flex;
+}
