@@ -18,11 +18,22 @@ class App extends Component {
         }
     }
 
+<<<<<<< HEAD
     handleDelete=(id)=>{
         const { employees } = this.state;
         
         employees.splice(id, 1);
         this.setState({ employees });
+=======
+    delete =(id) => {
+        const employees = this.state.employees.filter(emp=>{
+            if(emp.id === id){
+                return false
+            }
+            return true
+        })
+        this.setState({employees})
+>>>>>>> 3e0f4d8b6ac6b6e97432c6915ffdf2cae81c855b
     }
 
     getApiData = () => {
@@ -40,8 +51,8 @@ class App extends Component {
         this.setState({search:e.target.value});
     }
 
-    selectOnChange = (e) => {
-        this.setState({searchBy:e.target.value});
+    selectOnChange = (searchBy) => {
+        this.setState({searchBy});
     }
     setEmployee = (selected) => {
         this.setState({selected});
@@ -60,7 +71,11 @@ class App extends Component {
         
         const filteredEmployees = this.filter();
         const loader = <div className="lds-dual-ring"></div>;
+<<<<<<< HEAD
         let content = isLoading ? loader : <List handleDelete={this.handleDelete} setEmployee={this.setEmployee} employees={filteredEmployees} />
+=======
+        let content = isLoading ? loader : <List delete={this.delete} setEmployee={this.setEmployee} employees={filteredEmployees} />
+>>>>>>> 3e0f4d8b6ac6b6e97432c6915ffdf2cae81c855b
         if(!isLoading && !filteredEmployees.length){
             content = <div className="not-found">Data Not Found</div>
         }
@@ -70,6 +85,10 @@ class App extends Component {
             <Switch>
                 <div className="container">
                     <Route path="/" exact>
+                        <Search searchBy={searchBy} selectOnChange={this.selectOnChange} value={search} getSearch={this.getSearch} />
+                        {content}
+                    </Route>
+                    <Route path="/page/:page" exact>
                         <Search searchBy={searchBy} selectOnChange={this.selectOnChange} value={search} getSearch={this.getSearch} />
                         {content}
                     </Route>
