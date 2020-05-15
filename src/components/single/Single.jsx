@@ -64,22 +64,13 @@ class Single extends Component {
                             <div className="property">Email</div>
                             <div className="value">{employee.email}</div>
                         </li>
-                        <li>Logins:</li>  <BarChart width={600} height={300} data={data}
-                            margin={{top: 5, right: 30, left: 20, bottom: 5}}>
-                    <CartesianGrid strokeDasharray="3 3"/>
-                    <XAxis dataKey="month"/>
-                    <Tooltip/>
-                    <Bar dataKey="count" fill="#8884d8" />
-                    </BarChart>
-                      
+                   
                        
                     </ul>
                     <div className="input-group">
-  <div className="input-group-prepend">
-    <span className="input-group-text">With textarea</span>
-  </div>
-  <textarea className="form-control" aria-label="With textarea"></textarea>
-</div>
+                        
+                      
+                        </div>
                     <div className="chart">
                     <BarChart width={800} height={300} data={data}
                                 margin={{top: 5, right: 30, left: 20, bottom: 5}}>

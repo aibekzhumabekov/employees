@@ -5,10 +5,10 @@ import { Link }  from 'react-router-dom';
 
 class List extends Component {
     constructor(props){
-        super();
+        super(props);
         this.state = {
             limit: 20,
-            currentPage: 6
+            currentPage: 1
         }
     }
 
@@ -25,6 +25,7 @@ class List extends Component {
 
         const pagedData = employees.slice(start,end)
         let pages = [];
+
         for(let i=0;i<(employees.length / limit);i++){
             pages.push(i)
         }
@@ -41,7 +42,7 @@ class List extends Component {
                         </h3>
                         <div onClick={()=>this.setPage(currentPage-1)} className="page" >Prev</div>
                         {
-                            pages.map((item,ind)=>{
+                            pages.map((ind)=>{
                                 const cl = {page:true, active:ind+1 === currentPage}
                                 return <div onClick={()=>this.setPage(ind+1)} className={classNames(cl)} >{ind+1}</div>
                             })
@@ -62,13 +63,16 @@ class List extends Component {
                             pagedData.map((employee,ind)=>{
                                 const { id, first_name, last_name, email, city, state } = employee;
                                 return (
-                                <Link key={id} className="row" to={`/employee/${id}`}>
-                                    <div className="cell sm">{ind+1}</div>
-                                    <div className="cell">{first_name} {last_name}</div>
-                                    <div title={email} className="cell">{email}</div>
-                                    <div className="cell">{city}</div>
-                                    <div className="cell">{state}</div>
-                                </Link>
+                                    <div>
+                                        <button onClick={()=>this.props.handleDelete(ind)}>Delete Item</button>
+                                        <Link key={id} className="row" to={`/employee/${id}`}>
+                                            <div className="cell sm">{ind+1}</div>
+                                            <div className="cell">{first_name} {last_name}</div>
+                                            <div title={email} className="cell">{email}</div>
+                                            <div className="cell">{city}</div>
+                                            <div className="cell">{state}</div>
+                                        </Link>
+                                    </div>
                                 )
                             })
                         }
