@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {InputGroup, InputGroupAddon, InputGroupText, Button, Modal, ModalHeader, ModalBody, ModalFooter, Col, FormGroup, Label, Input } from 'reactstrap';
+import {InputGroup, InputGroupAddon, InputGroupText, Button, Modal, ModalHeader, ModalBody, ModalFooter, Col, Input } from 'reactstrap';
 
 class Edit extends Component {
   constructor(props){
@@ -15,11 +15,19 @@ class Edit extends Component {
      }
    }
 
+   
    onChangeName = e => {
-     const {employee} = this.state;
+     const employee = {...this.state.employee}
      employee.first_name = e.target.value;
+     this.setState({employee})
+   }
+   
+   onChangeLastName = e => {
+    const employee = {...this.state.employee}
+    employee.last_name = e.target.value;
     this.setState({employee})
    }
+
 
     render(){
       const { first_name, last_name, city, state, email } = this.state.employee;
@@ -38,7 +46,7 @@ class Edit extends Component {
           <InputGroupAddon addonType="prepend">
             <InputGroupText>Lastname</InputGroupText>
           </InputGroupAddon>
-          <Input value={last_name} />
+          <Input  onChange={this.onChangeLastName} value={last_name} />
       </InputGroup>
       <InputGroup className="mt-3">
           <InputGroupAddon addonType="prepend">
@@ -62,7 +70,7 @@ class Edit extends Component {
         </Col>
         </ModalBody>
         <ModalFooter>
-          <Button color="primary" onClick={this.props.onCancel}>Save</Button>{' '}
+          <Button color="primary" onClick={()=>this.props.onSave(this.state.employee)}>Save</Button>
           <Button color="secondary" onClick={this.props.onCancel}>Cancel</Button>
         </ModalFooter>
       </Modal>

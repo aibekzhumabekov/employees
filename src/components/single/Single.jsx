@@ -16,7 +16,13 @@ constructor(){
 }
 
 onEdit = () => this.setState({editMode:true})
+
 onCancel = () => this.setState({editMode:false})
+
+onSave= (employee) =>{
+    this.props.onSave(employee);
+    this.onCancel();
+}
 
     render(){
         const {id} = this.props.match.params;
@@ -45,7 +51,7 @@ onCancel = () => this.setState({editMode:false})
         })
         return (
              <div className="single">
-                 <Edit employee={employee} editMode={editMode} onCancel={this.onCancel}/>
+                 <Edit employee={employee} editMode={editMode} onCancel={this.onCancel} onSave={this.onSave}/>
                     <ul>
                         <li>
                             <div className="property">Action</div>

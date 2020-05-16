@@ -18,13 +18,6 @@ class App extends Component {
         }
     }
 
-<<<<<<< HEAD
-    handleDelete=(id)=>{
-        const { employees } = this.state;
-        
-        employees.splice(id, 1);
-        this.setState({ employees });
-=======
     delete =(id) => {
         const employees = this.state.employees.filter(emp=>{
             if(emp.id === id){
@@ -33,7 +26,6 @@ class App extends Component {
             return true
         })
         this.setState({employees})
->>>>>>> 3e0f4d8b6ac6b6e97432c6915ffdf2cae81c855b
     }
 
     getApiData = () => {
@@ -58,6 +50,15 @@ class App extends Component {
         this.setState({selected});
     }
 
+    onSave = (employee) => {
+        const newEmployees = this.state.employees.map((emp)=>{
+            if (emp.id === employee.id){
+                return employee
+            } return emp
+        })
+        this.setState({employees: newEmployees})
+    }
+
     filter = () => {
         const {employees, search, searchBy} = this.state;
         const filteredEmployees = employees.filter(employee => {
@@ -71,11 +72,7 @@ class App extends Component {
         
         const filteredEmployees = this.filter();
         const loader = <div className="lds-dual-ring"></div>;
-<<<<<<< HEAD
-        let content = isLoading ? loader : <List handleDelete={this.handleDelete} setEmployee={this.setEmployee} employees={filteredEmployees} />
-=======
         let content = isLoading ? loader : <List delete={this.delete} setEmployee={this.setEmployee} employees={filteredEmployees} />
->>>>>>> 3e0f4d8b6ac6b6e97432c6915ffdf2cae81c855b
         if(!isLoading && !filteredEmployees.length){
             content = <div className="not-found">Data Not Found</div>
         }
@@ -93,7 +90,7 @@ class App extends Component {
                         {content}
                     </Route>
                     <Route path="/employee/:id">
-                        {!isLoading && employees.length > 0 && <Single employees={employees} data={selected} />}
+                        {!isLoading && employees.length > 0 && <Single employees={employees} data={selected} onSave={this.onSave}/>}
                     </Route>
                     
                 </div>
