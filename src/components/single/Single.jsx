@@ -3,7 +3,7 @@ import { withRouter } from "react-router";
 import moment from 'moment';
 import { Button } from 'reactstrap';
 import {BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend} from 'recharts';
-import Edit from './Edit';
+import Edit from '../single/edit';
 
 import './single.css'
 
@@ -16,8 +16,7 @@ constructor(){
 }
 
 onEdit = () => this.setState({editMode:true})
-
-onCancel = () => this.setState({editMode:false})
+onClose = () => this.setState({editMode:false})
 
 onSave= (employee) =>{
     this.props.onSave(employee);
@@ -26,7 +25,7 @@ onSave= (employee) =>{
 
     render(){
         const {id} = this.props.match.params;
-        const { employees } = this.props;
+        const { employees, updateEmployee } = this.props;
         const { editMode } = this.state;
 
         let employee = { logins: [] };
@@ -51,7 +50,9 @@ onSave= (employee) =>{
         })
         return (
              <div className="single">
-                 <Edit employee={employee} editMode={editMode} onCancel={this.onCancel} onSave={this.onSave}/>
+                 {
+                    employee.first_name && <Edit updateEmployee={updateEmployee} employee={employee} editMode={editMode} onClose={this.onClose}/>
+                 }
                     <ul>
                         <li>
                             <div className="property">Action</div>
@@ -98,8 +99,8 @@ onSave= (employee) =>{
                     <div id="logins">
                         <h4>Login Count for {employee.first_name}: {employee.logins.length}</h4>
                      {
-                         employee.logins.map(login=>{
-                            return <div>{ moment(login.date).format('MMMM Do YYYY, h:mm:ss a')  }</div>
+                         employee.logins.map((login,i)=>{
+                            return <div key={i}>{ moment(login.date).format('MMMM Do YYYY, h:mm:ss a')  }</div>
                          })
                      }
                     </div>

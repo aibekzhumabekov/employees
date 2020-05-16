@@ -49,6 +49,15 @@ class App extends Component {
     setEmployee = (selected) => {
         this.setState({selected});
     }
+    updateEmployee = (employee) => {
+        const employees = this.state.employees.map(emp=>{
+            if(emp.id === employee.id) {
+                return employee
+            }
+            return emp
+        })
+        this.setState({employees});
+    }
 
     onSave = (employee) => {
         const newEmployees = this.state.employees.map((emp)=>{
@@ -90,7 +99,7 @@ class App extends Component {
                         {content}
                     </Route>
                     <Route path="/employee/:id">
-                        {!isLoading && employees.length > 0 && <Single employees={employees} data={selected} onSave={this.onSave}/>}
+                        <Single updateEmployee={this.updateEmployee} employees={employees} data={selected} />
                     </Route>
                     
                 </div>
