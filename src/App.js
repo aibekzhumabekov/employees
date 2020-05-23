@@ -3,7 +3,9 @@ import List from './components/list/List';
 import Search from './components/search/Search';
 import './app.scss';
 import { Switch, Route, BrowserRouter as Router } from 'react-router-dom';
+import { Button } from 'reactstrap';
 import Single from './components/single/Single';
+import Add from './components/single/Add'
 
 class App extends Component {
     constructor(){
@@ -90,7 +92,10 @@ class App extends Component {
             <Router>
             <Switch>
                 <div className="container">
+                    
                     <Route path="/" exact>
+                        <Button>Add Employee</Button>
+                        <Add />
                         <Search searchBy={searchBy} selectOnChange={this.selectOnChange} value={search} getSearch={this.getSearch} />
                         {content}
                     </Route>

@@ -3,7 +3,7 @@ import { withRouter } from "react-router";
 import moment from 'moment';
 import { Button } from 'reactstrap';
 import {BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend} from 'recharts';
-import Edit from '../single/edit';
+import Edit from '../single/Edit';
 
 import './single.css'
 
