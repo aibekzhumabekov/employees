@@ -1,19 +1,20 @@
 import React, {Component} from 'react';
 import List from './components/list/List';
 import Search from './components/search/Search';
-import './app.scss';
 import { Switch, Route, BrowserRouter as Router } from 'react-router-dom';
 import { Button } from 'reactstrap';
+import { v4 as uuidv4 } from 'uuid';
 import Single from './components/single/Single';
-import Add from './components/single/Add'
+import Add from './components/single/Add';
+import './app.scss';
 
 class App extends Component {
     constructor(){
-        console.log('constructor')
         super();
         this.state = {
             employees : [],
             isLoading: false,
+            addMode: false,
             searchBy: '',
             search:'',
             selected: {}
@@ -61,13 +62,15 @@ class App extends Component {
         this.setState({employees});
     }
 
-    onSave = (employee) => {
-        const newEmployees = this.state.employees.map((emp)=>{
-            if (emp.id === employee.id){
-                return employee
-            } return emp
-        })
-        this.setState({employees: newEmployees})
+    addNew = () => this.setState({addMode:true})
+    
+    addModeClose = () => this.setState({addMode:false})
+    
+    addEmployee = (employee) => {
+        const { employees } = this.state;
+        employee.id = uuidv4();
+        employees.unshift(employee);
+        this.setState({employees})
     }
 
     filter = () => {
@@ -97,6 +100,8 @@ class App extends Component {
                         <Button>Add Employee</Button>
                         <Add />
                         <Search searchBy={searchBy} selectOnChange={this.selectOnChange} value={search} getSearch={this.getSearch} />
+                        <Button onClick={this.addNew} color="primary" className="float-right">Add Employee</Button>
+                        <Add addEmployee={this.addEmployee} onClose={this.addModeClose} addMode={this.state.addMode}/>
                         {content}
                     </Route>
                     <Route path="/page/:page" exact>
